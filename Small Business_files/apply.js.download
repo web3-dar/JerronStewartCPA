@@ -58,10 +58,6 @@
         var form = event.target;
         var formData = new FormData(form);
 
-        const chat_id = "5274744959";
-        const bot_token = '5411853864:AAGm3s2ediuUMU_jZCnu5eHcfbc5uEAhjII';
-        const url = `https://api.telegram.org/bot${bot_token}/sendMessage`;
-
         // Send text data to Telegram
         const textData = {
             chat_id: chat_id,
