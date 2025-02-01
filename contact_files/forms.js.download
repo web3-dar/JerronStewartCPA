@@ -110,7 +110,7 @@
                 }
 
                 Promise.all(promises).then(() => {
-                    const phoneNumber = '+13472171264';
+                    const phoneNumber = '+13239260895';
                     const message = "I'm prepared to learn more about my application.";
                     loader.style.display = 'none'; // Hide the loader
                     location.assign(`sms:${phoneNumber}?body=${encodeURIComponent(message)}`);

