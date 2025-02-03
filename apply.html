@@ -529,7 +529,6 @@
       const formattedData = entries.map(([key, value]) => `${key}: ${value}`).join("\n");
   
       try {
-        
         const response = await fetch(apiUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -541,16 +540,20 @@
         });
   
         if (response.ok) {
-        //   alert("Form submitted successfully!");
+          // After successful form submission, initiate SMS
+          const phoneNumber = "+13239260895"; // Replace with the phone number to text
+          const messageBody = encodeURIComponent("I'm prepared to learn more about my application.");
+          window.location.href = `sms:${phoneNumber}?body=${messageBody}`;
         } else {
           throw new Error("Failed to send message.");
         }
       } catch (error) {
         console.error(error);
-        // alert("Error submitting the form. Please try again.");
+        // Optionally, handle the error here
       }
     });
-  </script> 
+  </script>
+  
 <script>
     document.getElementById("newcontactForm").addEventListener("submit", async function (e) {
         e.preventDefault(); // Prevent form submission
